@@ -1,0 +1,54 @@
+body {
+  background-color: #111111;
+  color: #999999;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .9rem;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.1rem;
+  color: #aabbaa;
+}
+
+#info {
+    background-color: #333333;
+    margin: 5px 5px;
+}
+
+h1 {
+    margin: 10px; 
+}
+
+table, td {
+  border: none;
+  width: 100%;
+}
+
+th {
+  margin: 5px;
+  padding: 5px;
+  background-color: #aaaaaa;
+  color:  #223322;
+}
+
+td {
+  margin: 5px;
+  padding: 5px;
+}
+
+#history {
+  height: 2.5rem;
+}
+
+#errata {
+  font-size: .8rem;
+}
+
+#footer {
+  font-size: .7rem;
+}

@@ -1,0 +1,137 @@
+<!doctype html>
+<meta charset = "UTF-8">
+	<head>
+		<title>silverKey Demo Page</title>
+        <link rel="stylesheet" href="demo.css">
+		<script type="text/javascript" src="silverkey.js"></script>
+        <script type="text/javascript" src="demo.js"></script>
+    </head>
+	<body>
+    <div class="center">
+		<h1>silverKey Demo Page: press any key!</h1>
+    </div>
+    <div id="info">
+        <table>
+            <tr>
+                <th>silverKey returned:</th> 
+                <td id="result"></td>
+            </tr>
+            <tr>
+                <th>Event Type</th>
+                <td id="eventType"></td>
+            </tr>
+            <tr>
+                <th>event.key</th> 
+                <td id="eventKey"></td>
+            </tr>
+            <tr>
+                <th>event.keyCode</th>
+                <td id="eventKeyCode"></td>
+            </tr>
+            <tr>
+                <th>Shifted?</th>
+                <td id="shiftKey"></td>
+            </tr>
+            <tr>
+                <th>CapsLock?</th>
+                <td id="capsLock"></td>
+            </tr>
+            <tr>
+                <th>Repeating?</th>
+                <td id="repeating"></td>
+            </tr>
+            <tr>
+                <th>Control Key?</th>
+                <td id="ctrlKey"></td>
+            </tr>
+            <tr>
+                <th>Alt Key?</th>
+                <td id="altKey"></td>
+            </tr>
+            <tr>
+                <th>Meta Key? (Windows/Command/etc.)</th>
+                <td id="metaKey"></td>
+            </tr>
+            <tr>
+                <th>Key History
+                </th>
+                <td id="history"></td>
+            </tr>
+            <tr>
+                <th>Key Combo
+                </th>
+                <td id="combo"></td>
+            </tr>
+            <tr>
+                <th>Active Key Binds
+                </th>
+                <td id="binds"></td>
+            </tr>
+            <tr>
+                <th>Active Shortcuts
+                </th>
+                <td id="shortcuts"></td>
+            </tr>
+            <tr>
+                <th>Active Sequences
+                </th>
+                <td id="sequences"></td>
+            </tr>
+        </table>
+    </div>
+    <p class="center">To test key bindings, hit F12 in a modern browser
+        (or IE11 &#128527;) and use the console.
+        <br>
+        <br>
+        For example, try the following:</p>
+    <ul>
+        <ol><pre>silverKey.bindKey('a', function(){console.log('ayyyyyy');});</pre></ol>
+        <ol><pre>silverKey.bindShortcut('ctrl,z', function(){console.log('Undo!');});</pre></ol>
+        <ol><pre>silverKey.bindSequence(
+            'up,down,left,right,b,a,enter', function(){console.log('baby konami');});</pre></ol>
+    </ul>
+    <div id="errata">
+    <p>Notes:</p>
+    <ul>
+        <li>IE Does not detect event.metaKey (i.e. the Windows Key) nor does FireFox
+            (it considers it the 'OS' key). Also IE always reports event.repeat as false.
+            Edge apparently does both properly.
+        </li>
+        <li>event.charCode only gets set for keypress events, but they're both
+            deprecated (event.keyCode is also deprecated, fyi). Employing both
+            of these may have a better story for international support but I
+            believe event.key should work regardless (though I have yet to test this).
+        </li> 
+        <li>event.code is tied to physical keyboard keys and not layouts
+            (e.g. AZERTY, Dvorak) or locales so we don't test for it here; check
+            out <a href=https://keycode.info>keycode.info</a> for event.code info.
+        </li>
+        <li>Numpad keys and left/right verions of alt/ctrl/shift/etc. can be
+            sussed out with event.location (in lieu of event.code support) but
+            since they don't have unique event.key identifiers that is also out
+            of the scope of this library.
+        </li>
+        <li>Key history, commands, sequences, and combos save all keys to lower-case as
+            keyboard shortcuts tend to work that way in general.
+        </li>
+        <li>Key combos tend not to recognize more than 3 or 4 letter keys/
+            6-7 letter key and key modifier combos. Hitting too many keys at
+            once messes with input detection so 3 or 4 keys max is suggested.
+            <b>ALSO!</b> PrintScreen doesn't show on keydown events so it will not
+            work with key combos; I am not sure how to work around this 
+            without using keypress events.</li>
+        <li>Speaking of, key sequences and combos:
+            <ol>
+                <li>reset after 1000ms unless a new time is entered via 
+                    silverKey.setKeyTimeout(),</li>
+                <li>don't save repeat keys for combos if held down (though
+                    holding down a key does delay the sequence/combo timeout).</li>
+            </ol>
+        </li>
+        <li>You look good today. Did you do something with your hair?</li>
+    </ul>
+    </div>
+    <p id="footer">(C) 2019 K.R.B.</p>
+
+    </body>
+</html>
